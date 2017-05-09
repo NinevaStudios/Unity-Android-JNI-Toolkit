@@ -43,6 +43,11 @@ namespace DeadMosquito.JniToolkit
             return ajo.Call<float>(methodName, args);
         }
 
+        public static double CallDouble(this AndroidJavaObject ajo, string methodName, params object[] args)
+        {
+            return ajo.Call<double>(methodName, args);
+        }
+
         public static int CallInt(this AndroidJavaObject ajo, string methodName, params object[] args)
         {
             return ajo.Call<int>(methodName, args);
@@ -115,6 +120,15 @@ namespace DeadMosquito.JniToolkit
             {
                 return ajc.CallStatic<T>(methodName, args);
             }
+        }
+
+        #endregion
+
+        #region Filed_Get_Proxy
+
+        public static float GetFloat(this AndroidJavaObject ajo, string fieldName)
+        {
+            return ajo.Get<float>(fieldName);
         }
 
         #endregion
