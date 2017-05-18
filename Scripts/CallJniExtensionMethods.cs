@@ -1,5 +1,6 @@
 ﻿#if UNITY_ANDROID
 using UnityEngine;
+using System;
 
 namespace DeadMosquito.JniToolkit
 {
@@ -131,7 +132,23 @@ namespace DeadMosquito.JniToolkit
             return ajo.Get<float>(fieldName);
         }
 
+        public static double GetDouble(this AndroidJavaObject ajo, string fieldName)
+        {
+            return ajo.Get<double>(fieldName);
+        }
         #endregion
+
+        public static T MainThreadGet<T>(this AndroidJavaObject ajo, string methodName, params object[] args)
+        {
+            T result = default(T);
+            bool wasSet = false;
+            JniToolkitUtils.RunOnUiThread(() => {
+                result = ajo.Call<T>(methodName, args);
+                wasSet = true;
+            });
+            while(!wasSet) {}
+            return result;
+        }
     }
 }
 #endif
