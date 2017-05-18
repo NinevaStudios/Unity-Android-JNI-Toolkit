@@ -138,7 +138,8 @@ namespace DeadMosquito.JniToolkit
         }
         #endregion
 
-        public static T MainThreadGet<T>(this AndroidJavaObject ajo, string methodName, params object[] args)
+        #region main_thread_get
+        public static T MainThreadCall<T>(this AndroidJavaObject ajo, string methodName, params object[] args)
         {
             T result = default(T);
             bool wasSet = false;
@@ -149,6 +150,17 @@ namespace DeadMosquito.JniToolkit
             while(!wasSet) {}
             return result;
         }
+
+        public static AndroidJavaObject MainThreadCallAJO(this AndroidJavaObject ajo, string methodName, params object[] args)
+        {
+            return ajo.MainThreadCall<AndroidJavaObject>(methodName, args);
+        }
+
+        public static string MainThreadCallStr(this AndroidJavaObject ajo, string methodName, params object[] args)
+        {
+            return ajo.MainThreadCall<string>(methodName, args);
+        }
+        #endregion
     }
 }
 #endif
