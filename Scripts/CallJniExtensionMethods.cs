@@ -151,6 +151,17 @@ namespace DeadMosquito.JniToolkit
             return result;
         }
 
+        public static void MainThreadCall(this AndroidJavaObject ajo, string methodName, params object[] args)
+        {
+            bool finished = false;
+            JniToolkitUtils.RunOnUiThread(() => {
+                ajo.Call(methodName, args);
+                finished = true;
+            });
+            while(!finished) {}
+            return;
+        }
+
         public static AndroidJavaObject MainThreadCallAJO(this AndroidJavaObject ajo, string methodName, params object[] args)
         {
             return ajo.MainThreadCall<AndroidJavaObject>(methodName, args);
