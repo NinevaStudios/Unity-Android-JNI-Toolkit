@@ -156,6 +156,26 @@ namespace DeadMosquito.JniToolkit
             return ajo.MainThreadCall<AndroidJavaObject>(methodName, args);
         }
 
+        public static int MainThreadCallInt(this AndroidJavaObject ajo, string methodName, params object[] args)
+        {
+            return ajo.MainThreadCall<int>(methodName, args);
+        }
+
+        public static float MainThreadCallFloat(this AndroidJavaObject ajo, string methodName, params object[] args)
+        {
+            return ajo.MainThreadCall<float>(methodName, args);
+        }
+
+        public static double MainThreadCallDouble(this AndroidJavaObject ajo, string methodName, params object[] args)
+        {
+            return ajo.MainThreadCall<double>(methodName, args);
+        }
+
+        public static bool MainThreadCallBool(this AndroidJavaObject ajo, string methodName, params object[] args)
+        {
+            return ajo.MainThreadCall<bool>(methodName, args);
+        }
+
         public static string MainThreadCallStr(this AndroidJavaObject ajo, string methodName, params object[] args)
         {
             return ajo.MainThreadCall<string>(methodName, args);
