@@ -1,9 +1,9 @@
-﻿#if UNITY_ANDROID
-using UnityEngine;
+﻿using UnityEngine;
 using System;
 
 namespace DeadMosquito.JniToolkit
 {
+    #if UNITY_ANDROID
     static class CallJniExtensionMethods
     {
 
@@ -193,5 +193,5 @@ namespace DeadMosquito.JniToolkit
         }
         #endregion
     }
+    #endif
 }
-#endif

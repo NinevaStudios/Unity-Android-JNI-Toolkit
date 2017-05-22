@@ -1,9 +1,9 @@
-﻿#if UNITY_ANDROID
-using UnityEngine;
+﻿using UnityEngine;
 using System;
 
 namespace DeadMosquito.JniToolkit
 {
+    #if UNITY_ANDROID
     public static class JniToolkitUtils
     {
         const string JavaLangSystemClass = "java.lang.System";
@@ -140,5 +140,5 @@ namespace DeadMosquito.JniToolkit
             Activity.Call("sendBroadcast", intent);
         }
     }
+    #endif
 }
-#endif
