@@ -3,7 +3,7 @@ using System;
 
 namespace DeadMosquito.JniToolkit
 {
-    #if UNITY_ANDROID
+#if UNITY_ANDROID
     static class CallJniExtensionMethods
     {
 
@@ -139,26 +139,44 @@ namespace DeadMosquito.JniToolkit
         #endregion
 
         #region main_thread_get
+        public static void MainThreadCallNonBlocking<T>(this AndroidJavaObject ajo, string methodName, params object[] args)
+        {
+            JniToolkitUtils.RunOnUiThread(() =>
+            {
+                ajo.Call<T>(methodName, args);
+            });
+        }
+
+        public static void MainThreadCallNonBlocking(this AndroidJavaObject ajo, string methodName, params object[] args)
+        {
+            JniToolkitUtils.RunOnUiThread(() =>
+            {
+                ajo.Call(methodName, args);
+            });
+        }
+
         public static T MainThreadCall<T>(this AndroidJavaObject ajo, string methodName, params object[] args)
         {
             T result = default(T);
             bool wasSet = false;
-            JniToolkitUtils.RunOnUiThread(() => {
+            JniToolkitUtils.RunOnUiThread(() =>
+            {
                 result = ajo.Call<T>(methodName, args);
                 wasSet = true;
             });
-            while(!wasSet) {}
+            while (!wasSet) { }
             return result;
         }
 
         public static void MainThreadCall(this AndroidJavaObject ajo, string methodName, params object[] args)
         {
             bool finished = false;
-            JniToolkitUtils.RunOnUiThread(() => {
+            JniToolkitUtils.RunOnUiThread(() =>
+            {
                 ajo.Call(methodName, args);
                 finished = true;
             });
-            while(!finished) {}
+            while (!finished) { }
             return;
         }
 
@@ -193,5 +211,5 @@ namespace DeadMosquito.JniToolkit
         }
         #endregion
     }
-    #endif
+#endif
 }
