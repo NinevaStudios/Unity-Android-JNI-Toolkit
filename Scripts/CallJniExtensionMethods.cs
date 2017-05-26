@@ -3,7 +3,6 @@ using System;
 
 namespace DeadMosquito.JniToolkit
 {
-#if UNITY_ANDROID
     static class CallJniExtensionMethods
     {
 
@@ -205,5 +204,4 @@ namespace DeadMosquito.JniToolkit
         }
         #endregion
     }
-#endif
 }

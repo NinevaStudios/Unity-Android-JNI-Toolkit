@@ -3,12 +3,27 @@ using System;
 
 namespace DeadMosquito.JniToolkit
 {
-    #if UNITY_ANDROID
     public static class JniToolkitUtils
     {
         const string JavaLangSystemClass = "java.lang.System";
 
         static AndroidJavaObject _activity;
+
+        public static bool IsAndroidRuntime
+        {
+            get
+            {
+                return Application.platform == RuntimePlatform.Android;
+            }
+        }
+
+        public static bool IsNotAndroidRuntime
+        {
+            get
+            {
+                return !IsAndroidRuntime;
+            }
+        }
 
         public static AndroidJavaObject Activity
         {
@@ -85,13 +100,6 @@ namespace DeadMosquito.JniToolkit
 
         #endregion
 
-        public static bool IsNotAndroidCheck()
-        {
-            bool isAndroid = Application.platform == RuntimePlatform.Android;
-
-            return !isAndroid;
-        }
-
         public static void RunOnUiThread(Action action)
         {
             Activity.Call("runOnUiThread", new AndroidJavaRunnable(action));
@@ -140,5 +148,4 @@ namespace DeadMosquito.JniToolkit
             Activity.Call("sendBroadcast", intent);
         }
     }
-    #endif
 }
