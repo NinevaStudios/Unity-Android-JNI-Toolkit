@@ -141,18 +141,12 @@ namespace DeadMosquito.JniToolkit
         #region main_thread_get
         public static void MainThreadCallNonBlocking<T>(this AndroidJavaObject ajo, string methodName, params object[] args)
         {
-            JniToolkitUtils.RunOnUiThread(() =>
-            {
-                ajo.Call<T>(methodName, args);
-            });
+            JniToolkitUtils.RunOnUiThread(() => ajo.Call<T>(methodName, args));
         }
 
         public static void MainThreadCallNonBlocking(this AndroidJavaObject ajo, string methodName, params object[] args)
         {
-            JniToolkitUtils.RunOnUiThread(() =>
-            {
-                ajo.Call(methodName, args);
-            });
+            JniToolkitUtils.RunOnUiThread(() => ajo.Call(methodName, args));
         }
 
         public static T MainThreadCall<T>(this AndroidJavaObject ajo, string methodName, params object[] args)
