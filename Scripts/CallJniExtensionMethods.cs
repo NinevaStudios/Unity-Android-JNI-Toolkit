@@ -170,7 +170,6 @@ namespace DeadMosquito.JniToolkit
                 finished = true;
             });
             while (!finished) { }
-            return;
         }
 
         public static AndroidJavaObject MainThreadCallAJO(this AndroidJavaObject ajo, string methodName, params object[] args)
