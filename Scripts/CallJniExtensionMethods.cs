@@ -135,6 +135,11 @@ namespace DeadMosquito.JniToolkit
         {
             return ajo.Get<double>(fieldName);
         }
+        
+        public static AndroidJavaObject GetAJO(this AndroidJavaObject ajo, string fieldName)
+        {
+            return ajo.Get<AndroidJavaObject>(fieldName);
+        }
         #endregion
 
         #region main_thread_get
