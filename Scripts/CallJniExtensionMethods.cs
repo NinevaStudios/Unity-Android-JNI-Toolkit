@@ -1,8 +1,7 @@
-﻿using UnityEngine;
-using System;
-
-namespace DeadMosquito.JniToolkit
+﻿namespace DeadMosquito.JniToolkit
 {
+	using UnityEngine;
+
 	static class CallJniExtensionMethods
 	{
 		public static string GetClassName(this AndroidJavaObject ajo)

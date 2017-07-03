@@ -1,8 +1,8 @@
-﻿using UnityEngine;
-using System;
-
-namespace DeadMosquito.JniToolkit
+﻿namespace DeadMosquito.JniToolkit
 {
+	using System;
+	using UnityEngine;
+
 	public static class JniToolkitUtils
 	{
 		const string JavaLangSystemClass = "java.lang.System";
@@ -44,7 +44,7 @@ namespace DeadMosquito.JniToolkit
 
 		public static AndroidJavaObject ContentResolver
 		{
-			get { return JniToolkitUtils.Activity.CallAJO("getContentResolver"); }
+			get { return Activity.CallAJO("getContentResolver"); }
 		}
 
 		public static bool HasSystemFeature(string feature)
