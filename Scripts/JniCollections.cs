@@ -46,6 +46,16 @@
 			return list;
 		}
 
+		public static AndroidJavaObject ToJavaList<T>(this List<T> items, Func<T, AndroidJavaObject> converter)
+		{
+			var list = new AndroidJavaObject("java.util.ArrayList");
+			foreach (var item in items)
+			{
+				list.Call<bool>("add", converter(item));
+			}
+			return list;
+		}
+
 		public static Dictionary<string, object> FromJavaMap(this AndroidJavaObject javaMap)
 		{
 			if (javaMap == null || javaMap.IsJavaNull())
@@ -59,7 +69,7 @@
 			var iterator = javaMap.CallAJO("keySet").CallAJO("iterator");
 			while (iterator.CallBool("hasNext"))
 			{
-				string key = iterator.CallStr("next");
+				var key = iterator.CallStr("next");
 				var value = javaMap.CallAJO("get", key);
 				dictionary.Add(key, ParseJavaBoxedValue(value));
 			}
@@ -89,6 +99,7 @@
 				case "String":
 					return boxedValueAjo.CallStr("toString");
 			}
+
 			return boxedValueAjo;
 		}
 	}
