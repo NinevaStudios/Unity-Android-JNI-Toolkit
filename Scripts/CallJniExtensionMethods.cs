@@ -158,10 +158,21 @@
 			T result = default(T);
 			bool wasSet = false;
 			JniToolkitUtils.RunOnUiThread(() =>
-			{
-				result = ajo.Call<T>(methodName, args);
-				wasSet = true;
-			});
+				{
+					try
+					{
+					
+						result = ajo.Call<T>(methodName, args);
+					}
+					catch
+					{
+						// Ignored
+					}
+					finally
+					{
+						wasSet = true;
+					}
+				});
 			while (!wasSet)
 			{
 			}
@@ -172,10 +183,20 @@
 		{
 			bool finished = false;
 			JniToolkitUtils.RunOnUiThread(() =>
-			{
-				ajo.Call(methodName, args);
-				finished = true;
-			});
+				{
+					try
+					{
+						ajo.Call(methodName, args);
+					}
+					catch
+					{
+						// Ignored
+					}
+					finally
+					{
+						finished = true;
+					}
+				});
 			while (!finished)
 			{
 			}

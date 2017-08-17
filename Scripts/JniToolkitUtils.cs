@@ -86,7 +86,7 @@
 
 		public static bool IsJavaNull(this AndroidJavaObject ajo)
 		{
-			return ajo.GetRawObject().ToInt32() == 0;
+			return ajo == null || ajo.GetRawObject().ToInt32() == 0;
 		}
 
 		#endregion

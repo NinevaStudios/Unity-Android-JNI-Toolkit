@@ -8,7 +8,7 @@
 	{
 		public static List<T> FromJavaList<T>(this AndroidJavaObject javaList)
 		{
-			if (javaList == null || javaList.IsJavaNull())
+			if (javaList.IsJavaNull())
 			{
 				return new List<T>();
 			}
@@ -28,7 +28,7 @@
 
 		public static List<T> FromJavaList<T>(this AndroidJavaObject javaList, Func<AndroidJavaObject, T> converter)
 		{
-			if (javaList == null || javaList.IsJavaNull())
+			if (javaList.IsJavaNull())
 			{
 				return new List<T>();
 			}
@@ -59,7 +59,7 @@
 
 		public static Dictionary<string, object> FromJavaMap(this AndroidJavaObject javaMap)
 		{
-			if (javaMap == null || javaMap.IsJavaNull())
+			if (javaMap.IsJavaNull())
 			{
 				return new Dictionary<string, object>();
 			}
@@ -81,7 +81,7 @@
 
 		public static object ParseJavaBoxedValue(AndroidJavaObject boxedValueAjo)
 		{
-			if (boxedValueAjo == null || boxedValueAjo.IsJavaNull())
+			if (boxedValueAjo.IsJavaNull())
 			{
 				return null;
 			}
