@@ -111,6 +111,14 @@
 		{
 			return ajc.CallStatic<AndroidJavaObject>(methodName, args);
 		}
+		
+		public static void AJCCallStaticOnce(this string className, string methodName, params object[] args)
+		{
+			using (var ajc = new AndroidJavaClass(className))
+			{
+				ajc.CallStatic(methodName, args);
+			}
+		}
 
 		public static T AJCCallStaticOnce<T>(this string className, string methodName, params object[] args)
 		{
