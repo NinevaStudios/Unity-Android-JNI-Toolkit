@@ -1,4 +1,4 @@
-﻿namespace DeadMosquito.JniToolkit
+﻿namespace DeadMosquito.JniToolkit.GooglePlaces
 {
 	using System;
 	using System.Collections.Generic;
