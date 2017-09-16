@@ -109,7 +109,9 @@
 					Debug.LogWarning("Could not start the activity with " + intent.JavaToString() + ": " + exception.Message);
 				}
 				if (fallback != null)
+				{
 					fallback();
+				}
 			}
 			finally
 			{
