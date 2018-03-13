@@ -49,6 +49,12 @@
 		public static AndroidJavaObject ToJavaList<T>(this List<T> items, Func<T, AndroidJavaObject> converter)
 		{
 			var list = new AndroidJavaObject("java.util.ArrayList");
+
+			if (items == null || items.Count == 0)
+			{
+				return list;
+			}
+			
 			foreach (var item in items)
 			{
 				list.Call<bool>("add", converter(item));
