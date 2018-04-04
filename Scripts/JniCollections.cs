@@ -46,7 +46,7 @@
 			return list;
 		}
 
-		public static AndroidJavaObject ToJavaList<T>(this List<T> items, Func<T, AndroidJavaObject> converter)
+		public static AndroidJavaObject ToJavaList<T, TJAVA>(this List<T> items, Func<T, TJAVA> converter)
 		{
 			var list = new AndroidJavaObject("java.util.ArrayList");
 
