@@ -4,6 +4,8 @@
 
 	static class CallJniExtensionMethods
 	{
+		static int hackyDummy = 0;
+		
 		public static string GetClassName(this AndroidJavaObject ajo)
 		{
 			return ajo.GetJavaClass().Call<string>("getName");
@@ -183,6 +185,8 @@
 				});
 			while (!wasSet)
 			{
+				// Hack for IL2CPP to not optimize the loop
+				hackyDummy++;
 			}
 			return result;
 		}
@@ -207,6 +211,8 @@
 				});
 			while (!finished)
 			{
+				// Hack for IL2CPP to not optimize the loop
+				hackyDummy++;
 			}
 		}
 
