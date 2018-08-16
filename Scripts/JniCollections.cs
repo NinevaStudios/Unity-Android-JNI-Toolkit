@@ -1,9 +1,12 @@
-﻿namespace NinevaStudios.AwarenessApi
+using JetBrains.Annotations;
+
+namespace NinevaStudios.AwarenessApi
 {
 	using System;
 	using System.Collections.Generic;
 	using UnityEngine;
 
+	[PublicAPI]
 	public static class JniCollections
 	{
 		public static List<T> FromJavaList<T>(this AndroidJavaObject javaList)
@@ -54,7 +57,7 @@
 			{
 				return list;
 			}
-			
+
 			foreach (var item in items)
 			{
 				list.Call<bool>("add", converter(item));

@@ -1,8 +1,11 @@
-﻿namespace NinevaStudios.AwarenessApi
+using JetBrains.Annotations;
+
+namespace NinevaStudios.AwarenessApi
 {
 	using System;
 	using UnityEngine;
 
+	[PublicAPI]
 	public static class JniToolkitUtils
 	{
 		const string JavaLangSystemClass = "java.lang.System";
@@ -28,6 +31,7 @@
 					var unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
 					_activity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
 				}
+
 				return _activity;
 			}
 		}
@@ -108,6 +112,7 @@
 				{
 					Debug.LogWarning("Could not start the activity with " + intent.JavaToString() + ": " + exception.Message);
 				}
+
 				if (fallback != null)
 				{
 					fallback();

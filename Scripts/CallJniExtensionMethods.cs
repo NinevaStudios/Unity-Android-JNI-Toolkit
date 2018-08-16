@@ -1,7 +1,10 @@
-﻿namespace NinevaStudios.AwarenessApi
+﻿using JetBrains.Annotations;
+
+namespace NinevaStudios.AwarenessApi
 {
 	using UnityEngine;
 
+	[PublicAPI]
 	static class CallJniExtensionMethods
 	{
 		static int hackyDummy = 0;
@@ -128,6 +131,11 @@
 			{
 				return ajc.CallStatic<T>(methodName, args);
 			}
+		}
+		
+		public static AndroidJavaObject AJCCallStaticOnceAJO(this string className, string methodName, params object[] args)
+		{
+			return className.AJCCallStaticOnce<AndroidJavaObject>(methodName, args);
 		}
 
 		#endregion
