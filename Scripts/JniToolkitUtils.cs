@@ -1,4 +1,4 @@
-﻿namespace DeadMosquito.JniToolkit
+﻿namespace NinevaStudios.AwarenessApi
 {
 	using System;
 	using UnityEngine;

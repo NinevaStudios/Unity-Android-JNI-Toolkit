@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace DeadMosquito.JniToolkit
+namespace NinevaStudios.AwarenessApi
 {
 	public static class BitmapUtils
 	{
