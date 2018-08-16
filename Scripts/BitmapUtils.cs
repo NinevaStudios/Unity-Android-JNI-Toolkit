@@ -1,7 +1,9 @@
-﻿using UnityEngine;
+﻿using JetBrains.Annotations;
+using UnityEngine;
 
 namespace DeadMosquito.JniToolkit
 {
+	[PublicAPI]
 	public static class BitmapUtils
 	{
 		const string AndroidGraphicsBitmapFactory = "android.graphics.BitmapFactory";

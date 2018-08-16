@@ -1,8 +1,11 @@
-﻿namespace DeadMosquito.JniToolkit
+﻿using JetBrains.Annotations;
+
+namespace DeadMosquito.JniToolkit
 {
 	using System;
 	using UnityEngine;
 
+	[PublicAPI]
 	public static class JniToolkitUtils
 	{
 		const string JavaLangSystemClass = "java.lang.System";

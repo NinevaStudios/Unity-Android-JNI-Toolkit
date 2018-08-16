@@ -1,9 +1,12 @@
-﻿namespace DeadMosquito.JniToolkit
+﻿using JetBrains.Annotations;
+
+namespace DeadMosquito.JniToolkit
 {
 	using System;
 	using System.Collections.Generic;
 	using UnityEngine;
 
+	[PublicAPI]
 	public static class JniCollections
 	{
 		public static List<T> FromJavaList<T>(this AndroidJavaObject javaList)
