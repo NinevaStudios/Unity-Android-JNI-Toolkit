@@ -28,6 +28,26 @@ namespace NinevaStudios.AwarenessApi
 			javaList.Dispose();
 			return list;
 		}
+		
+		public static List<T> FromJavaIterable<T>(this AndroidJavaObject javaIterable)
+		{
+			if (javaIterable.IsJavaNull())
+			{
+				return new List<T>();
+			}
+
+			var size = javaIterable.CallInt("size");
+			var iterator = javaIterable.CallAJO("iterator");
+			var list = new List<T>(size);
+
+			while (iterator.CallBool("hasNext"))
+			{
+				list.Add(iterator.Call<T>("next"));
+			}
+
+			javaIterable.Dispose();
+			return list;
+		}
 
 		public static List<T> FromJavaList<T>(this AndroidJavaObject javaList, Func<AndroidJavaObject, T> converter)
 		{
