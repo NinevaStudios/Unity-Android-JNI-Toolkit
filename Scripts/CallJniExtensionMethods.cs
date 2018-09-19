@@ -1,6 +1,6 @@
 ﻿using JetBrains.Annotations;
 
-namespace NinevaStudios.AwarenessApi
+namespace DeadMosquito.JniToolkit
 {
 	using UnityEngine;
 

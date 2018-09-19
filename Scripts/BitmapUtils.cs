@@ -1,7 +1,7 @@
 ﻿using JetBrains.Annotations;
 using UnityEngine;
 
-namespace NinevaStudios.AwarenessApi
+namespace DeadMosquito.JniToolkit
 {
 	[PublicAPI]
 	public static class BitmapUtils
