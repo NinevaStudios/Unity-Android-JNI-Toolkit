@@ -1,6 +1,6 @@
 ﻿using JetBrains.Annotations;
 
-namespace DeadMosquito.JniToolkit
+namespace Nineva.LocationTracker
 {
 	using System;
 	using UnityEngine;

@@ -1,7 +1,7 @@
 ﻿using JetBrains.Annotations;
 using UnityEngine;
 
-namespace DeadMosquito.JniToolkit
+namespace Nineva.LocationTracker
 {
 	[PublicAPI]
 	public static class BitmapUtils
