@@ -18,10 +18,34 @@ But you might as well can just copy the contents of the `Scripts` folder over to
 
 ## JNI Extension methods
 
-* Shortcut methods to avoid passing a type parameter all the time, also helps with autocomplete:
+* Shortcut methods to avoid passing a type parameter all the time, also helps with autocomplete.
+
+Some example code snippets:
 
 ```csharp
 var key = iterator.CallStr("next"); // same as iterator.Call<string>("next")
+```
+
+```csharp
+var result = new WifiInfo
+{
+  BSSID = wifiInfoAJO.CallStr("getBSSID"),
+  SSID = wifiInfoAJO.CallStr("getSSID"),
+  MacAddress = wifiInfoAJO.CallStr("getMacAddress"),
+  LinkSpeed = wifiInfoAJO.CallInt("getLinkSpeed"),
+  NetworkId = wifiInfoAJO.CallInt("getNetworkId"),
+  IpAddress = wifiInfoAJO.CallInt("getIpAddress"),
+  Rssi = wifiInfoAJO.CallInt("getRssi")
+};
+```
+
+* Safe null checking
+
+```csharp
+if (networkInfo.IsJavaNull())
+{
+  return false;
+}
 ```
 
 * Call `void remove()` method on some `AndroidJavaObject` on the main thread
@@ -29,3 +53,4 @@ var key = iterator.CallStr("next"); // same as iterator.Call<string>("next")
 ```csharp
 _ajo.MainThreadCall("remove");
 ```
+
