@@ -9,13 +9,15 @@ git submodule add git@github.com:TarasOsiris/Unity-Android-JNI-Toolkit.git unity
 
 # Functionality
 
-## CallJniExtensionMethods
+## JNI Extension methods
 
-Provides functionality to easier call JNI methods and also execute calls on main Android thread blocking Unity thread while operation is not finished.
+* Shortcut methods to avoid passing a type parameter all the time, also helps with autocomplete:
 
 ```csharp
-var key = iterator.CallStr("next");
+var key = iterator.CallStr("next"); // same as iterator.Call<string>("next")
 ```
+
+* Call `void remove()` method on some `AndroidJavaObject` on the main thread
 
 ```csharp
 _ajo.MainThreadCall("remove");
