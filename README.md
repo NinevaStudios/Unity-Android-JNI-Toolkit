@@ -56,7 +56,7 @@ if (networkInfo.IsJavaNull())
 }
 ```
 
-* Call `void remove()` method on some `AndroidJavaObject` on the main thread
+* Calling mthods on the main (UI) thread
 
 ```csharp
 _ajo.MainThreadCall("remove");
