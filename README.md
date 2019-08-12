@@ -16,6 +16,16 @@ But you might as well can just copy the contents of the `Scripts` folder over to
 
 # Functionality
 
+The functionality consists of lots of small granular methods that are intended to reduce the amount of boilerplate code written when using Unity JNI API.
+
+* Acessing the Unity Activity. The object is lazy initialized and cached:
+
+```csharp
+_printHelper = new AndroidJavaObject(C.AndroidPrintHelper, AGUtils.Activity);
+```
+
+Lot's of the Android methods take `Context` object as a parameter, so you can pass `AGUtils.Activity` as Activity extends Context in Android
+
 * Shortcut methods to avoid passing a type parameter all the time, also helps with autocomplete.
 
 Some example code snippets:
