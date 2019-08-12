@@ -1,6 +1,8 @@
 # Unity-Android JNI Toolkit
 
-A collection of methods for Unity-Android Plugin development simplification.
+A collection of methods for Unity-Android Plugin development simplification. The library is production ready and used in the following Unity Asset Store products:
+* [Android Native Goodies PRO](https://assetstore.unity.com/packages/tools/integration/android-native-goodies-pro-67473)
+* [Google Maps View](https://www.assetstore.unity3d.com/#!/content/82542)
 
 # To add as submodule to subfolder
 
