@@ -16,8 +16,6 @@ But you might as well can just copy the contents of the `Scripts` folder over to
 
 # Functionality
 
-## JNI Extension methods
-
 * Shortcut methods to avoid passing a type parameter all the time, also helps with autocomplete.
 
 Some example code snippets:
