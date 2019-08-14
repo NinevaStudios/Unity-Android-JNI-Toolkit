@@ -62,3 +62,28 @@ if (networkInfo.IsJavaNull())
 _ajo.MainThreadCall("remove");
 ```
 
+* Get various AJOs and other things
+
+Like `ActivityDecorView`, `PackageManager`, `ContentResolver` etc. Check system features with `HasSystemFeature` method. Get current time in millis `CurrentTimeMillis` etc.
+
+* Cast `AndroidJavaObject` to the class:
+
+```csharp
+static AndroidJavaObject GetSystemService(string name, string serviceClass)
+{
+  try
+  {
+    var serviceObj = AGUtils.Activity.CallAJO("getSystemService", name);
+    return serviceObj.Cast(serviceClass);
+  }
+  catch (Exception e)
+  {
+    if (Debug.isDebugBuild)
+    {
+      Debug.LogWarning("Failed to get " + name + " service. Error: " + e.Message);
+    }
+
+    return null;
+  }
+}
+```
