@@ -194,7 +194,7 @@ namespace DeadMosquito.JniToolkit
 			while (!wasSet)
 			{
 				// Hack for IL2CPP to not optimize the loop
-				hackyDummy++;
+				hackyDummy = Screen.width;
 			}
 			return result;
 		}
@@ -220,7 +220,7 @@ namespace DeadMosquito.JniToolkit
 			while (!finished)
 			{
 				// Hack for IL2CPP to not optimize the loop
-				hackyDummy++;
+				hackyDummy = Screen.width;
 			}
 		}
 
