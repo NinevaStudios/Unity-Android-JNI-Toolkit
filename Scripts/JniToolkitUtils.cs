@@ -12,15 +12,9 @@ namespace DeadMosquito.JniToolkit
 
 		static AndroidJavaObject _activity;
 
-		public static bool IsAndroidRuntime
-		{
-			get { return Application.platform == RuntimePlatform.Android; }
-		}
+		public static bool IsAndroidRuntime => Application.platform == RuntimePlatform.Android;
 
-		public static bool IsNotAndroidRuntime
-		{
-			get { return !IsAndroidRuntime; }
-		}
+		public static bool IsNotAndroidRuntime => !IsAndroidRuntime;
 
 		public static AndroidJavaObject Activity
 		{
@@ -36,20 +30,11 @@ namespace DeadMosquito.JniToolkit
 			}
 		}
 
-		public static AndroidJavaObject ActivityDecorView
-		{
-			get { return Activity.Call<AndroidJavaObject>("getWindow").Call<AndroidJavaObject>("getDecorView"); }
-		}
+		public static AndroidJavaObject ActivityDecorView => Activity.Call<AndroidJavaObject>("getWindow").Call<AndroidJavaObject>("getDecorView");
 
-		public static AndroidJavaObject PackageManager
-		{
-			get { return Activity.CallAJO("getPackageManager"); }
-		}
+		public static AndroidJavaObject PackageManager => Activity.CallAJO("getPackageManager");
 
-		public static AndroidJavaObject ContentResolver
-		{
-			get { return Activity.CallAJO("getContentResolver"); }
-		}
+		public static AndroidJavaObject ContentResolver => Activity.CallAJO("getContentResolver");
 
 		public static bool HasSystemFeature(string feature)
 		{
