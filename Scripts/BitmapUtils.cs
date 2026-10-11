@@ -16,10 +16,14 @@ namespace DeadMosquito.JniToolkit
 
 		public static Texture2D Texture2DFromBitmap(AndroidJavaObject bitmapAjo)
 		{
-			var compressFormatPng = new AndroidJavaClass("android.graphics.Bitmap$CompressFormat").GetStatic<AndroidJavaObject>("PNG");
-			var outputStream = new AndroidJavaObject("java.io.ByteArrayOutputStream");
-			bitmapAjo.CallBool("compress", compressFormatPng, 100, outputStream);
-			var buffer = outputStream.Call<byte[]>("toByteArray");
+			byte[] buffer;
+			using (var compressFormatClass = new AndroidJavaClass("android.graphics.Bitmap$CompressFormat"))
+			using (var compressFormatPng = compressFormatClass.GetStatic<AndroidJavaObject>("PNG"))
+			using (var outputStream = new AndroidJavaObject("java.io.ByteArrayOutputStream"))
+			{
+				bitmapAjo.CallBool("compress", compressFormatPng, 100, outputStream);
+				buffer = outputStream.Call<byte[]>("toByteArray");
+			}
 
 			var tex = new Texture2D(2, 2);
 			tex.LoadImage(buffer);

@@ -1,4 +1,4 @@
-using JetBrains.Annotations;
+﻿using JetBrains.Annotations;
 
 namespace DeadMosquito.JniToolkit
 {
@@ -36,13 +36,14 @@ namespace DeadMosquito.JniToolkit
 				return new List<T>();
 			}
 
-			var size = javaIterable.CallInt("size");
-			var iterator = javaIterable.CallAJO("iterator");
-			var list = new List<T>(size);
-
-			while (iterator.CallBool("hasNext"))
+			// java.lang.Iterable has no size()
+			var list = new List<T>();
+			using (var iterator = javaIterable.CallAJO("iterator"))
 			{
-				list.Add(iterator.Call<T>("next"));
+				while (iterator.CallBool("hasNext"))
+				{
+					list.Add(iterator.Call<T>("next"));
+				}
 			}
 
 			javaIterable.Dispose();
@@ -96,12 +97,15 @@ namespace DeadMosquito.JniToolkit
 			int size = javaMap.CallInt("size");
 			var dictionary = new Dictionary<string, object>(size);
 
-			var iterator = javaMap.CallAJO("keySet").CallAJO("iterator");
-			while (iterator.CallBool("hasNext"))
+			using (var keySet = javaMap.CallAJO("keySet"))
+			using (var iterator = keySet.CallAJO("iterator"))
 			{
-				var key = iterator.CallStr("next");
-				var value = javaMap.CallAJO("get", key);
-				dictionary.Add(key, ParseJavaBoxedValue(value));
+				while (iterator.CallBool("hasNext"))
+				{
+					var key = iterator.CallStr("next");
+					var value = javaMap.CallAJO("get", key);
+					dictionary.Add(key, ParseJavaBoxedValue(value));
+				}
 			}
 
 			javaMap.Dispose();

@@ -7,16 +7,16 @@ namespace DeadMosquito.JniToolkit
 	[PublicAPI]
 	static class CallJniExtensionMethods
 	{
-		static int hackyDummy = 0;
-		
 		public static string GetClassName(this AndroidJavaObject ajo)
 		{
-			return ajo.GetJavaClass().Call<string>("getName");
+			using var javaClass = ajo.GetJavaClass();
+			return javaClass.Call<string>("getName");
 		}
 
 		public static string GetClassSimpleName(this AndroidJavaObject ajo)
 		{
-			return ajo.GetJavaClass().Call<string>("getSimpleName");
+			using var javaClass = ajo.GetJavaClass();
+			return javaClass.Call<string>("getSimpleName");
 		}
 
 		public static AndroidJavaObject GetJavaClass(this AndroidJavaObject ajo)
@@ -161,67 +161,40 @@ namespace DeadMosquito.JniToolkit
 
 		#region main_thread_get
 
+		/// <summary>
+		/// Posts the call to the Android UI thread without waiting. Exceptions are logged.
+		/// </summary>
 		public static void MainThreadCallNonBlocking<T>(this AndroidJavaObject ajo, string methodName, params object[] args)
 		{
 			JniToolkitUtils.RunOnUiThread(() => ajo.Call<T>(methodName, args));
 		}
 
+		/// <summary>
+		/// Posts the call to the Android UI thread without waiting. Exceptions are logged.
+		/// </summary>
 		public static void MainThreadCallNonBlocking(this AndroidJavaObject ajo, string methodName, params object[] args)
 		{
 			JniToolkitUtils.RunOnUiThread(() => ajo.Call(methodName, args));
 		}
 
+		/// <summary>
+		/// Calls the method on the Android UI thread and waits for the result. Java exceptions are rethrown as <see cref="AndroidJavaException"/>,
+		/// a <see cref="System.TimeoutException"/> is thrown if the UI thread doesn't run the call in time (the call is then cancelled).
+		/// See <see cref="JniToolkitUtils.RunOnUiThreadBlocking{T}"/>.
+		/// </summary>
 		public static T MainThreadCall<T>(this AndroidJavaObject ajo, string methodName, params object[] args)
 		{
-			T result = default(T);
-			bool wasSet = false;
-			JniToolkitUtils.RunOnUiThread(() =>
-				{
-					try
-					{
-					
-						result = ajo.Call<T>(methodName, args);
-					}
-					catch
-					{
-						// Ignored
-					}
-					finally
-					{
-						wasSet = true;
-					}
-				});
-			while (!wasSet)
-			{
-				// Hack for IL2CPP to not optimize the loop
-				hackyDummy = Screen.width;
-			}
-			return result;
+			return JniToolkitUtils.RunOnUiThreadBlocking(() => ajo.Call<T>(methodName, args));
 		}
 
+		/// <summary>
+		/// Calls the method on the Android UI thread and waits for it to complete. Java exceptions are rethrown as <see cref="AndroidJavaException"/>,
+		/// a <see cref="System.TimeoutException"/> is thrown if the UI thread doesn't run the call in time (the call is then cancelled).
+		/// See <see cref="JniToolkitUtils.RunOnUiThreadBlocking{T}"/>.
+		/// </summary>
 		public static void MainThreadCall(this AndroidJavaObject ajo, string methodName, params object[] args)
 		{
-			bool finished = false;
-			JniToolkitUtils.RunOnUiThread(() =>
-				{
-					try
-					{
-						ajo.Call(methodName, args);
-					}
-					catch
-					{
-						// Ignored
-					}
-					finally
-					{
-						finished = true;
-					}
-				});
-			while (!finished)
-			{
-				// Hack for IL2CPP to not optimize the loop
-				hackyDummy = Screen.width;
-			}
+			JniToolkitUtils.RunOnUiThreadBlocking(() => ajo.Call(methodName, args));
 		}
 
 		public static AndroidJavaObject MainThreadCallAJO(this AndroidJavaObject ajo, string methodName, params object[] args)
