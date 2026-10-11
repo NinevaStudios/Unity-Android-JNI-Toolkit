@@ -28,7 +28,7 @@ namespace DeadMosquito.JniToolkit
 			javaList.Dispose();
 			return list;
 		}
-		
+
 		public static List<T> FromJavaIterable<T>(this AndroidJavaObject javaIterable)
 		{
 			if (javaIterable.IsJavaNull())

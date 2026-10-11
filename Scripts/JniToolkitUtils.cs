@@ -196,6 +196,7 @@ namespace DeadMosquito.JniToolkit
 		sealed class BlockingCall<T>
 		{
 			readonly object _lock = new object();
+
 			// Not disposed on purpose: after a timeout the runnable may still signal it
 			readonly ManualResetEventSlim _done = new ManualResetEventSlim(false);
 			bool _timedOut;

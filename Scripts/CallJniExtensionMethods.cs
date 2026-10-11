@@ -116,7 +116,7 @@ namespace DeadMosquito.JniToolkit
 		{
 			return ajc.CallStatic<AndroidJavaObject>(methodName, args);
 		}
-		
+
 		public static void AJCCallStaticOnce(this string className, string methodName, params object[] args)
 		{
 			using (var ajc = new AndroidJavaClass(className))
@@ -132,7 +132,7 @@ namespace DeadMosquito.JniToolkit
 				return ajc.CallStatic<T>(methodName, args);
 			}
 		}
-		
+
 		public static AndroidJavaObject AJCCallStaticOnceAJO(this string className, string methodName, params object[] args)
 		{
 			return className.AJCCallStaticOnce<AndroidJavaObject>(methodName, args);
